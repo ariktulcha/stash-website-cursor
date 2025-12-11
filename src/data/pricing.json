@@ -1,58 +1,186 @@
 {
   "colored-paper-wristbands": {
-    "minQuantity": 500,
+    "minQuantity": 250,
     "currency": "ILS",
-    "tiers": [
-      { "min": 500, "max": 999, "pricePerUnit": 0.45 },
-      { "min": 1000, "max": 2499, "pricePerUnit": 0.38 },
-      { "min": 2500, "max": 4999, "pricePerUnit": 0.32 },
-      { "min": 5000, "max": 9999, "pricePerUnit": 0.28 },
-      { "min": 10000, "max": null, "pricePerUnit": 0.25 }
+    "hasVariants": true,
+    "variants": [
+      {
+        "id": "color-print",
+        "name": "הדפסה צבעונית",
+        "tiers": [
+          { "quantity": 250, "pricePerUnit": 0.65 },
+          { "quantity": 500, "pricePerUnit": 0.55 },
+          { "quantity": 1000, "pricePerUnit": 0.42 },
+          { "quantity": 1500, "pricePerUnit": 0.4 },
+          { "quantity": 2000, "pricePerUnit": 0.37 },
+          { "quantity": 3000, "pricePerUnit": 0.35 },
+          { "quantity": 4000, "pricePerUnit": 0.32 },
+          { "quantity": 5000, "pricePerUnit": 0.28 },
+          { "quantity": 10000, "pricePerUnit": 0.25 }
+        ]
+      },
+      {
+        "id": "black-print",
+        "name": "הדפסה בשחור",
+        "tiers": [
+          { "quantity": 250, "pricePerUnit": 0.5 },
+          { "quantity": 500, "pricePerUnit": 0.45 },
+          { "quantity": 1000, "pricePerUnit": 0.33 },
+          { "quantity": 1500, "pricePerUnit": 0.32 },
+          { "quantity": 2000, "pricePerUnit": 0.3 },
+          { "quantity": 3000, "pricePerUnit": 0.29 },
+          { "quantity": 4000, "pricePerUnit": 0.27 },
+          { "quantity": 5000, "pricePerUnit": 0.24 },
+          { "quantity": 10000, "pricePerUnit": 0.22 }
+        ]
+      },
+      {
+        "id": "no-print",
+        "name": "ללא הדפס",
+        "tiers": [
+          { "quantity": 250, "pricePerUnit": 0.35 },
+          { "quantity": 500, "pricePerUnit": 0.3 },
+          { "quantity": 1000, "pricePerUnit": 0.25 },
+          { "quantity": 1500, "pricePerUnit": 0.24 },
+          { "quantity": 2000, "pricePerUnit": 0.22 },
+          { "quantity": 3000, "pricePerUnit": 0.21 },
+          { "quantity": 4000, "pricePerUnit": 0.2 },
+          { "quantity": 5000, "pricePerUnit": 0.18 },
+          { "quantity": 10000, "pricePerUnit": 0.17 }
+        ]
+      }
     ]
   },
   "fabric-wristbands": {
-    "minQuantity": 100,
+    "minQuantity": 50,
     "currency": "ILS",
+    "hasVariants": false,
     "tiers": [
-      { "min": 100, "max": 499, "pricePerUnit": 2.50 },
-      { "min": 500, "max": 999, "pricePerUnit": 2.20 },
-      { "min": 1000, "max": 2499, "pricePerUnit": 1.95 },
-      { "min": 2500, "max": 4999, "pricePerUnit": 1.75 },
-      { "min": 5000, "max": null, "pricePerUnit": 1.60 }
+      { "quantity": 50, "pricePerUnit": 6.9 },
+      { "quantity": 80, "pricePerUnit": 5.9 },
+      { "quantity": 100, "pricePerUnit": 4.95 },
+      { "quantity": 150, "pricePerUnit": 4.5 },
+      { "quantity": 200, "pricePerUnit": 4.1 },
+      { "quantity": 300, "pricePerUnit": 3.1 },
+      { "quantity": 400, "pricePerUnit": 2.8 },
+      { "quantity": 500, "pricePerUnit": 2.6 },
+      { "quantity": 1000, "pricePerUnit": 2.0 },
+      { "quantity": 2000, "pricePerUnit": 1.9 },
+      { "quantity": 3000, "pricePerUnit": 1.7 },
+      { "quantity": 5000, "pricePerUnit": 1.6 }
+    ],
+    "additionalOptions": [
+      {
+        "id": "threaded-bead",
+        "name": "תוספת חרוז מושחל",
+        "pricePerUnit": 0.38,
+        "description": "תוספת חרוז מושחל: 0.38 ש\"ח לצמיד"
+      }
     ]
   },
   "paper-graphic-wristbands": {
     "minQuantity": 250,
     "currency": "ILS",
+    "hasVariants": false,
     "tiers": [
-      { "min": 250, "max": 499, "pricePerUnit": 0.85 },
-      { "min": 500, "max": 999, "pricePerUnit": 0.72 },
-      { "min": 1000, "max": 2499, "pricePerUnit": 0.65 },
-      { "min": 2500, "max": 4999, "pricePerUnit": 0.58 },
-      { "min": 5000, "max": null, "pricePerUnit": 0.52 }
+      { "quantity": 250, "pricePerUnit": 0.85 },
+      { "quantity": 500, "pricePerUnit": 0.72 },
+      { "quantity": 1000, "pricePerUnit": 0.65 },
+      { "quantity": 2500, "pricePerUnit": 0.58 },
+      { "quantity": 5000, "pricePerUnit": 0.52 }
     ]
   },
   "vinyl-wristbands": {
     "minQuantity": 100,
     "currency": "ILS",
-    "tiers": [
-      { "min": 100, "max": 499, "pricePerUnit": 2.80 },
-      { "min": 500, "max": 999, "pricePerUnit": 2.50 },
-      { "min": 1000, "max": 2499, "pricePerUnit": 2.25 },
-      { "min": 2500, "max": 4999, "pricePerUnit": 2.00 },
-      { "min": 5000, "max": null, "pricePerUnit": 1.85 }
+    "hasVariants": true,
+    "variants": [
+      {
+        "id": "black-print",
+        "name": "עם הדפסה בשחור",
+        "tiers": [
+          { "quantity": 100, "pricePerUnit": 5.0 },
+          { "quantity": 250, "pricePerUnit": 4.5 },
+          { "quantity": 500, "pricePerUnit": 3.3 },
+          { "quantity": 1000, "pricePerUnit": 3.0 },
+          { "quantity": 1500, "pricePerUnit": 2.7 },
+          { "quantity": 2000, "pricePerUnit": 2.5 },
+          { "quantity": 3000, "pricePerUnit": 2.3 },
+          { "quantity": 4000, "pricePerUnit": 2.0 },
+          { "quantity": 5000, "pricePerUnit": 1.7 },
+          { "quantity": 10000, "pricePerUnit": 1.5 }
+        ]
+      },
+      {
+        "id": "no-print",
+        "name": "ללא הדפס",
+        "tiers": [
+          { "quantity": 100, "pricePerUnit": 3.0 },
+          { "quantity": 250, "pricePerUnit": 2.7 },
+          { "quantity": 500, "pricePerUnit": 2.0 },
+          { "quantity": 1000, "pricePerUnit": 1.8 },
+          { "quantity": 1500, "pricePerUnit": 1.6 },
+          { "quantity": 2000, "pricePerUnit": 1.5 },
+          { "quantity": 3000, "pricePerUnit": 1.25 },
+          { "quantity": 4000, "pricePerUnit": 1.0 },
+          { "quantity": 5000, "pricePerUnit": 0.9 },
+          { "quantity": 10000, "pricePerUnit": 0.65 }
+        ]
+      }
     ]
   },
   "production-tags": {
-    "minQuantity": 50,
+    "minQuantity": 10,
     "currency": "ILS",
-    "tiers": [
-      { "min": 50, "max": 99, "pricePerUnit": 3.50 },
-      { "min": 100, "max": 249, "pricePerUnit": 3.00 },
-      { "min": 250, "max": 499, "pricePerUnit": 2.75 },
-      { "min": 500, "max": 999, "pricePerUnit": 2.50 },
-      { "min": 1000, "max": null, "pricePerUnit": 2.25 }
+    "hasVariants": true,
+    "variants": [
+      {
+        "id": "pvc-premium",
+        "name": "PVC - תג פרמיום",
+        "tiers": [
+          { "quantity": 10, "pricePerUnit": 25.0 },
+          { "quantity": 20, "pricePerUnit": 22.0 },
+          { "quantity": 50, "pricePerUnit": 17.0 },
+          { "quantity": 100, "pricePerUnit": 14.0 }
+        ]
+      },
+      {
+        "id": "standard-lamination",
+        "name": "תג סטנדרט - לימינציה",
+        "tiers": [
+          { "quantity": 10, "pricePerUnit": 19.0 },
+          { "quantity": 20, "pricePerUnit": 15.0 },
+          { "quantity": 50, "pricePerUnit": 9.5 },
+          { "quantity": 100, "pricePerUnit": 7.1 }
+        ]
+      }
+    ]
+  },
+  "lanyards": {
+    "minQuantity": 10,
+    "currency": "ILS",
+    "hasVariants": true,
+    "variants": [
+      {
+        "id": "with-text",
+        "name": "שרוך עם כיתוב",
+        "tiers": [
+          { "quantity": 10, "pricePerUnit": 15.0 },
+          { "quantity": 20, "pricePerUnit": 12.0 },
+          { "quantity": 50, "pricePerUnit": 9.0 },
+          { "quantity": 100, "pricePerUnit": 7.5 }
+        ]
+      },
+      {
+        "id": "regular",
+        "name": "שרוך רגיל",
+        "tiers": [
+          { "quantity": 10, "pricePerUnit": 3.5 },
+          { "quantity": 20, "pricePerUnit": 3.5 },
+          { "quantity": 50, "pricePerUnit": 3.5 },
+          { "quantity": 100, "pricePerUnit": 3.5 }
+        ]
+      }
     ]
   }
 }
-
