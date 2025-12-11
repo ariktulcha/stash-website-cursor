@@ -4,9 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Calculator, MessageCircle, TrendingDown } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { MessageCircle, TrendingDown } from "lucide-react";
 import pricingData from "@/data/pricing.json";
 
 interface PriceCalculatorProps {
@@ -30,36 +30,39 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
   
   // Initialize state
   const [quantity, setQuantity] = useState(productPricing?.minQuantity || 500);
-  const [selectedVariant, setSelectedVariant] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set());
+  const [selectedVariant, setSelectedVariant] = useState<string>("");
 
-  // Initialize variant selection
+  // Initialize quantity and variant
   useEffect(() => {
     if (productPricing) {
       setQuantity(productPricing.minQuantity);
       
+      // Set default variant if has variants
       if (productPricing.hasVariants && productPricing.variants && productPricing.variants.length > 0) {
         setSelectedVariant(productPricing.variants[0].id);
       }
     }
   }, [productPricing]);
 
-  // Get the current pricing structure (either variants or direct tiers)
+  // Get the current pricing structure (use selected variant or direct pricing)
   const currentPricing = useMemo(() => {
     if (!productPricing) return null;
     
-    if (productPricing.hasVariants && productPricing.variants) {
+    // If has variants, use the selected variant
+    if (productPricing.hasVariants && productPricing.variants && productPricing.variants.length > 0) {
       const variant = productPricing.variants.find(v => v.id === selectedVariant);
       return variant || productPricing.variants[0];
     }
     
+    // Otherwise use direct pricing
     return productPricing;
   }, [productPricing, selectedVariant]);
 
   const priceCalculation = useMemo(() => {
     if (!productPricing || !currentPricing) return null;
 
-    // Get tiers from current pricing (either variant or direct)
+    // Get tiers from current pricing
     const tiers = currentPricing.tiers || [];
     if (tiers.length === 0) return null;
 
@@ -85,7 +88,7 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
     // Calculate savings compared to minimum tier
     const minTier = tiers[tiers.length - 1]; // Smallest quantity tier
     const minTierPrice = quantity * minTier.pricePerUnit;
-    const savings = minTierPrice - baseTotalPrice;
+    const savings = minTierPrice - totalPrice;
     const savingsPercent = minTierPrice > 0 ? (savings / minTierPrice) * 100 : 0;
 
     return {
@@ -124,37 +127,28 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
     : productPricing.minQuantity * 10;
   const maxSliderValue = Math.max(maxTierQuantity, 10000);
 
-  // Get available quantities for quick selection
-  const availableQuantities = tiers.map(t => t.quantity).sort((a, b) => a - b);
-
   return (
     <Card variant="gradient" className="mt-8">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 flex-row-reverse">
-          <Calculator className="h-5 w-5" />
-          מחשבון מחיר
-        </CardTitle>
-      </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
           {/* Variant Selection */}
-          {productPricing.hasVariants && productPricing.variants && (
+          {productPricing.hasVariants && productPricing.variants && productPricing.variants.length > 0 && (
             <div>
-              <Label className="mb-2 block text-base text-right">
-                סוג מוצר
+              <Label className="mb-2 block text-base text-center">
+                סוג הדפסה
               </Label>
               <RadioGroup
                 value={selectedVariant}
                 onValueChange={setSelectedVariant}
-                className="space-y-2"
+                className="space-y-2 flex flex-col items-center"
                 dir="rtl"
               >
                 {productPricing.variants.map((variant) => (
-                  <div key={variant.id} className="flex items-center space-x-2 space-x-reverse flex-row-reverse">
+                  <div key={variant.id} className="flex items-center gap-2 w-full justify-center">
                     <RadioGroupItem value={variant.id} id={variant.id} />
                     <Label
                       htmlFor={variant.id}
-                      className="flex-1 cursor-pointer text-right"
+                      className="flex-1 cursor-pointer text-center text-sm"
                     >
                       {variant.name}
                     </Label>
@@ -166,10 +160,10 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
 
           {/* Quantity Input */}
           <div>
-            <Label htmlFor="quantity" className="mb-2 block text-base text-right">
+            <Label htmlFor="quantity" className="mb-2 block text-base text-center">
               כמות יחידות
             </Label>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+            <div className="flex flex-col gap-3 items-center">
               <Input
                 id="quantity"
                 type="number"
@@ -179,50 +173,50 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
                   const val = Number(e.target.value);
                   if (!isNaN(val) && val >= productPricing.minQuantity) {
                     handleQuantityChange(val);
+                  } else if (e.target.value === "" || e.target.value === "0") {
+                    // Allow empty input while typing
+                    setQuantity(productPricing.minQuantity);
                   }
                 }}
-                className="text-lg font-semibold text-center sm:flex-1"
+                onBlur={(e) => {
+                  const val = Number(e.target.value);
+                  if (isNaN(val) || val < productPricing.minQuantity) {
+                    setQuantity(productPricing.minQuantity);
+                  }
+                }}
+                className="text-2xl font-semibold text-center w-full max-w-xs py-6"
                 dir="ltr"
+                placeholder={`הזן כמות (מינימום: ${productPricing.minQuantity.toLocaleString('he-IL')})`}
               />
-              <span className="text-sm text-muted-foreground text-right sm:text-right whitespace-nowrap">
-                מינימום: {productPricing.minQuantity.toLocaleString('he-IL')}
+              <span className="text-sm text-muted-foreground text-center">
+                מינימום: {productPricing.minQuantity.toLocaleString('he-IL')} יחידות
               </span>
             </div>
-            <Slider
-              value={[quantity]}
-              onValueChange={([value]) => handleQuantityChange(value)}
-              min={productPricing.minQuantity}
-              max={maxSliderValue}
-              step={productPricing.minQuantity >= 500 ? 50 : 25}
-              className="mt-4"
-            />
-            {/* Quick quantity selection buttons */}
-            {availableQuantities.length > 0 && availableQuantities.length <= 12 && (
-              <div className="flex flex-wrap gap-2 mt-3 justify-end">
-                {availableQuantities.map((qty) => (
-                  <Button
-                    key={qty}
-                    variant={quantity >= qty ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => handleQuantityChange(qty)}
-                    className="text-xs"
-                  >
-                    {qty.toLocaleString('he-IL')}
-                  </Button>
-                ))}
+            <div className="mt-4">
+              <Slider
+                value={[Math.min(quantity, maxSliderValue)]}
+                onValueChange={([value]) => handleQuantityChange(value)}
+                min={productPricing.minQuantity}
+                max={maxSliderValue}
+                step={productPricing.minQuantity >= 500 ? 50 : 25}
+                className="w-full"
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>{productPricing.minQuantity.toLocaleString('he-IL')}</span>
+                <span>{maxSliderValue.toLocaleString('he-IL')}</span>
               </div>
-            )}
+            </div>
           </div>
 
           {/* Additional Options */}
           {productPricing.additionalOptions && productPricing.additionalOptions.length > 0 && (
             <div>
-              <Label className="mb-2 block text-base text-right">
+              <Label className="mb-2 block text-base text-center">
                 אפשרויות נוספות
               </Label>
-              <div className="space-y-2" dir="rtl">
+              <div className="space-y-2 flex flex-col items-center">
                 {productPricing.additionalOptions.map((option) => (
-                  <div key={option.id} className="flex items-center space-x-2 space-x-reverse flex-row-reverse">
+                  <div key={option.id} className="flex items-center gap-2 w-full justify-center">
                     <Checkbox
                       id={option.id}
                       checked={selectedOptions.has(option.id)}
@@ -230,14 +224,9 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
                     />
                     <Label
                       htmlFor={option.id}
-                      className="flex-1 cursor-pointer text-right text-sm"
+                      className="cursor-pointer text-center text-sm"
                     >
                       {option.name}
-                      {option.description && (
-                        <span className="block text-xs text-muted-foreground mt-1">
-                          {option.description}
-                        </span>
-                      )}
                       <span className="block text-xs font-semibold text-primary mt-1">
                         +₪{option.pricePerUnit.toFixed(2)} ליחידה
                       </span>
@@ -250,20 +239,20 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
 
           {/* Price Display */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t">
-            <div className="text-right">
+            <div className="text-center">
               <div className="text-sm text-muted-foreground mb-1">
                 מחיר ליחידה
               </div>
               <div className="text-2xl sm:text-3xl font-bold text-primary">
                 ₪{priceCalculation.unitPrice.toFixed(2)}
                 {priceCalculation.additionalCost > 0 && (
-                  <span className="text-lg text-muted-foreground">
-                    {" "}+ {priceCalculation.additionalCost / quantity} תוספות
+                  <span className="text-lg text-muted-foreground block mt-1">
+                    + ₪{(priceCalculation.additionalCost / quantity).toFixed(2)} תוספות
                   </span>
                 )}
               </div>
             </div>
-            <div className="text-right">
+            <div className="text-center">
               <div className="text-sm text-muted-foreground mb-1">
                 מחיר כולל
               </div>
@@ -280,9 +269,9 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
 
           {/* Savings Display */}
           {priceCalculation.savings > 0 && (
-            <div className="bg-success/10 border border-success/20 rounded-lg p-3 flex items-center gap-2 flex-row-reverse">
+            <div className="bg-success/10 border border-success/20 rounded-lg p-3 flex items-center justify-center gap-2">
               <TrendingDown className="h-4 w-4 text-success flex-shrink-0" />
-              <div className="text-sm text-right">
+              <div className="text-sm text-center">
                 <span className="font-semibold text-success">
                   חיסכון של ₪{priceCalculation.savings.toLocaleString('he-IL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
@@ -292,38 +281,6 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
               </div>
             </div>
           )}
-
-          {/* Price Tiers Info */}
-          <div className="bg-muted/30 rounded-lg p-4">
-            <div className="text-sm font-semibold mb-2 text-right">
-              טבלת מחירים{currentPricing.name ? ` - ${currentPricing.name}` : ""}:
-            </div>
-            <div className="space-y-1 text-xs">
-              {tiers.map((tier, index) => {
-                const isActive = priceCalculation.tier.quantity === tier.quantity;
-                const nextTier = tiers[index - 1];
-                const displayQuantity = nextTier 
-                  ? `${tier.quantity.toLocaleString('he-IL')} - ${(nextTier.quantity - 1).toLocaleString('he-IL')}`
-                  : `${tier.quantity.toLocaleString('he-IL')}+`;
-                
-                return (
-                  <div
-                    key={index}
-                    className={`flex justify-between items-center py-1 px-2 rounded flex-row-reverse ${
-                      isActive ? "bg-primary/10 font-semibold" : ""
-                    }`}
-                  >
-                    <span className="text-right">
-                      {displayQuantity}
-                    </span>
-                    <span className={`text-right ${isActive ? "text-primary" : ""}`}>
-                      ₪{tier.pricePerUnit.toFixed(2)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
 
           <Button
             variant="hero"
@@ -339,7 +296,7 @@ export const PriceCalculator = ({ productId }: PriceCalculatorProps) => {
                     return option?.name || id;
                   }).join(', ')}`
                 : "";
-              const message = `היי, אני מעוניין ב-${quantity.toLocaleString('he-IL')} יחידות.${variantText}${optionsText}\n\nהמחיר שהמחשבון הציג:\n• מחיר ליחידה: ₪${priceCalculation.unitPrice.toFixed(2)}\n• מחיר כולל: ₪${priceCalculation.totalPrice.toLocaleString('he-IL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+              const message = `היי, אני מעוניין ב-${quantity.toLocaleString('he-IL')} יחידות.${variantText}${optionsText}\n\nהמחיר שהמחשבון הציג:\n• מחיר ליחידה: ₪${priceCalculation.unitPrice.toFixed(2)}${priceCalculation.additionalCost > 0 ? ` + ₪${(priceCalculation.additionalCost / quantity).toFixed(2)} תוספות` : ''}\n• מחיר כולל: ₪${priceCalculation.totalPrice.toLocaleString('he-IL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
               window.open(
                 `https://wa.me/9720559753446?text=${encodeURIComponent(message)}`,
                 "_blank"
