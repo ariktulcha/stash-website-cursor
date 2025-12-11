@@ -1,14 +1,38 @@
+# Robots.txt for Stash Events
+# https://stash-events.co.il
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://stash-events.co.il/sitemap.xml
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
 
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
 Allow: /

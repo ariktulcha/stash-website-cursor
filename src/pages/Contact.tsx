@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle, Phone, Mail, MapPin, Clock, Send, Instagram, Facebook } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import SEO from "@/components/SEO";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -60,8 +61,34 @@ const Contact = () => {
     });
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "צור קשר - Stash Events",
+    description: "מוכנים להפוך את האירוע שלכם לבלתי נשכח? צרו קשר ונמצא יחד את הפתרון המושלם",
+    url: "https://stash-events.co.il/contact",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Stash Events",
+      telephone: "+972-55-975-3446",
+      email: "info@stash-events.co.il",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Tel Aviv",
+        addressCountry: "IL"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="צור קשר - Stash Events | הזמנת צמידים ותגי הפקה"
+        description="מוכנים להפוך את האירוע שלכם לבלתי נשכח? צרו קשר ונמצא יחד את הפתרון המושלם. WhatsApp: 055-975-3446 | מייל: info@stash-events.co.il"
+        keywords="צור קשר Stash Events, הזמנת צמידים, הצעת מחיר צמידים, שירות לקוחות צמידים, WhatsApp צמידים"
+        url="https://stash-events.co.il/contact"
+        structuredData={structuredData}
+      />
       <Header />
       
       <main className="py-12 sm:py-16 md:py-20">

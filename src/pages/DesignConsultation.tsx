@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Palette, ImageIcon, CheckCircle, Users, Star, Zap, Lightbulb, FileImage, Sparkles } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const DesignConsultation = () => {
   const services = [
@@ -105,6 +106,12 @@ const DesignConsultation = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="ייעוץ ועיצוב מקצועי - Stash Events | עיצוב חינם לצמידים ותגי הפקה"
+        description="ייעוץ עיצוב חינם לצמידי אירועים ותגי הפקה. עיצוב מותאם אישית, תצוגה מקדימה דיגיטלית, המלצות מקצועיות ושינויים ללא הגבלה. מושלם לחתונות, פסטיבלים ואירועים עסקיים."
+        keywords="עיצוב צמידים, ייעוץ עיצוב חינם, עיצוב מותאם אישית צמידים, עיצוב לוגו על צמידים, עיצוב תגי הפקה, עיצוב חינם לאירועים"
+        url="https://stash-events.co.il/design-consultation"
+      />
       <Header />
       
       <main>

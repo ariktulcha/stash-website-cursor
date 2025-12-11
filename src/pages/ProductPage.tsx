@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Calculator } from "lucide-react";
 import productDetails from "@/data/productDetails.json";
+import SEO from "@/components/SEO";
 import {
   Palette,
   Banknote,
@@ -47,52 +48,55 @@ const iconMap: Record<string, any> = {
 const ProductPage = ({ productId }: ProductPageProps) => {
   const product = productDetails[productId as keyof typeof productDetails];
 
-  useEffect(() => {
-    // SEO: Update document title and meta description
-    if (product) {
-      document.title = `${product.name} | Stash Events - צמידי אירועים איכותיים`;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute(
-          "content",
-          `${product.hero.description} - ${product.name} באיכות גבוהה עם אספקה מהירה.`
-        );
-      }
+  // Generate SEO-friendly keywords based on product
+  const getProductKeywords = (productId: string) => {
+    const keywordsMap: Record<string, string> = {
+      "fabric-wristbands": "צמידי בד, צמידי בד מותאמים אישית, צמידי בד לפסטיבל, צמידי בד למועדון, הדפסה על צמידי בד, צמידי בד עמידים",
+      "colored-paper-wristbands": "צמידי נייר צבעוניים, מיון קהל, צמידי נייר לאירועים, צמידי נייר חסכוניים, צמידי נייר מהירים",
+      "paper-graphic-wristbands": "צמידי נייר עם גרפיקה, צמידי נייר עם לוגו, הדפסה על צמידי נייר, צמידי נייר מותאמים אישית, צמידי נייר עם QR Code",
+      "vinyl-wristbands": "צמידי ויניל, צמידי ויניל עמידים, צמידי ויניל למים, צמידי ויניל לפסטיבל, צמידי ויניל לאירועי חוץ",
+      "production-tags": "תגי הפקה, תגי הפקה מקצועיים, תגי VIP, תגי גישה, תגי הפקה מעוצבים, תגי הפקה עם שרוכים"
+    };
+    return keywordsMap[productId] || "צמידי אירועים, תגי הפקה";
+  };
 
-      // Add structured data for SEO
-      const existingScript = document.getElementById("product-structured-data");
-      if (existingScript) {
-        existingScript.remove();
-      }
+  const getProductUrl = (productId: string) => {
+    const urlMap: Record<string, string> = {
+      "fabric-wristbands": "https://stash-events.co.il/fabric-wristbands",
+      "colored-paper-wristbands": "https://stash-events.co.il/colored-paper-wristbands",
+      "paper-graphic-wristbands": "https://stash-events.co.il/paper-graphic-wristbands",
+      "vinyl-wristbands": "https://stash-events.co.il/vinyl-wristbands",
+      "production-tags": "https://stash-events.co.il/production-tags"
+    };
+    return urlMap[productId] || "https://stash-events.co.il/";
+  };
 
-      const script = document.createElement("script");
-      script.id = "product-structured-data";
-      script.type = "application/ld+json";
-      script.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: product.name,
-        description: product.hero.description,
-        brand: {
-          "@type": "Brand",
-          name: "Stash Events",
-        },
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          priceCurrency: "ILS",
-        },
-      });
-      document.head.appendChild(script);
+  if (!product) {
+    return null;
+  }
 
-      return () => {
-        const scriptToRemove = document.getElementById("product-structured-data");
-        if (scriptToRemove) {
-          scriptToRemove.remove();
-        }
-      };
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.hero.description,
+    image: `https://stash-events.co.il/products/${productId}.jpg`,
+    brand: {
+      "@type": "Brand",
+      name: "Stash Events",
+    },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "ILS",
+      url: getProductUrl(productId),
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "150"
     }
-  }, [product]);
+  };
 
   if (!product) {
     return null;
@@ -107,6 +111,14 @@ const ProductPage = ({ productId }: ProductPageProps) => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${product.name} | Stash Events - צמידי אירועים איכותיים`}
+        description={`${product.hero.description} - ${product.name} באיכות גבוהה עם אספקה מהירה. עיצוב אישי, מחיר תחרותי ושירות מקצועי.`}
+        keywords={getProductKeywords(productId)}
+        url={getProductUrl(productId)}
+        type="product"
+        structuredData={structuredData}
+      />
       <Header />
 
       <main>

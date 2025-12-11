@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Phone, Mail, MessageCircle, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
+  const location = useLocation();
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="relative overflow-hidden">
       {/* Background with gradient and pattern */}
@@ -60,35 +72,20 @@ const Footer = () => {
             <div className="text-center md:text-right">
               <h3 className="font-semibold text-foreground mb-6 text-lg sm:text-xl">ניווט מהיר</h3>
               <nav className="flex flex-col space-y-3">
-                <Link to="/" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   דף הבית
                 </Link>
-                <Link to="/fabric-wristbands" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/fabric-wristbands" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   צמידי בד
                 </Link>
-                <Link to="/colored-paper-wristbands" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/colored-paper-wristbands" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   צמידי נייר צבעוני
                 </Link>
-                <Link to="/paper-graphic-wristbands" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/paper-graphic-wristbands" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   צמידי נייר + גרפיקה
                 </Link>
-                <Link to="/production-tags" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/production-tags" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   תגי הפקה
-                </Link>
-                <Link to="/about" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  אודות
-                </Link>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  צור קשר
-                </Link>
-                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  שאלות ותשובות
-                </Link>
-                <Link to="/design-consultation" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  יעוץ ועיצוב
-                </Link>
-                <Link to="/delivery-times" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  זמני אספקה
                 </Link>
               </nav>
             </div>
@@ -127,11 +124,26 @@ const Footer = () => {
             <div className="text-center md:text-right">
               <h3 className="font-semibold text-foreground mb-6 text-lg sm:text-xl">מידע נוסף</h3>
               <nav className="flex flex-col space-y-3">
-                <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
-                  מדיניות פרטיות
+                <Link to="/about" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  אודות
                 </Link>
-                <Link to="/which-wristband-to-choose" className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                <Link to="/contact" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  צור קשר
+                </Link>
+                <Link to="/faq" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  שאלות ותשובות
+                </Link>
+                <Link to="/design-consultation" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  יעוץ ועיצוב
+                </Link>
+                <Link to="/delivery-times" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  זמני אספקה
+                </Link>
+                <Link to="/which-wristband-to-choose" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
                   איזה צמיד לבחור?
+                </Link>
+                <Link to="/privacy" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-all text-sm sm:text-base py-1.5 hover:translate-x-[-4px]">
+                  מדיניות פרטיות
                 </Link>
               </nav>
             </div>
@@ -152,25 +164,6 @@ const Footer = () => {
           {/* Legal Links & Copyright */}
           <div className="max-w-6xl mx-auto mt-10 sm:mt-12">
             <div className="flex flex-col gap-6 items-center">
-              {/* Legal Links */}
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 space-x-reverse text-xs sm:text-sm text-muted-foreground">
-                <Link to="/privacy" className="hover:text-primary transition-colors whitespace-nowrap px-2 py-1 rounded hover:bg-primary/5">
-                  מדיניות פרטיות
-                </Link>
-                <span className="text-border/50">•</span>
-                <Link to="/faq" className="hover:text-primary transition-colors whitespace-nowrap px-2 py-1 rounded hover:bg-primary/5">
-                  שאלות ותשובות
-                </Link>
-                <span className="text-border/50">•</span>
-                <Link to="/delivery-times" className="hover:text-primary transition-colors whitespace-nowrap px-2 py-1 rounded hover:bg-primary/5">
-                  זמני אספקה
-                </Link>
-                <span className="text-border/50 hidden sm:inline">•</span>
-                <Link to="/design-consultation" className="hover:text-primary transition-colors whitespace-nowrap px-2 py-1 rounded hover:bg-primary/5">
-                  יעוץ ועיצוב
-                </Link>
-              </div>
-              
               {/* Copyright */}
               <div className="text-xs sm:text-sm text-muted-foreground text-center">
                 <p className="font-medium">© 2024 STASH - כל הזכויות שמורות</p>

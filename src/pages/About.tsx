@@ -6,10 +6,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle, Users, Star, Target } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const About = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "אודות Stash Events",
+    description: "חברת STASH נולדה מתוך עולם חיי הלילה והאירועים - כי הבנו שחוויית הלקוח מתחילה בפרטים הכי קטנים",
+    url: "https://stash-events.co.il/about"
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="אודותינו - Stash Events | צמידי אירועים ותגי הפקה מקצועיים"
+        description="חברת STASH נולדה מתוך עולם חיי הלילה והאירועים. צמידי בד, צמידי נייר, תגי הפקה - הכל עם שירות מהיר, עיצוב אישי ומחיר תחרותי."
+        keywords="אודות Stash Events, חברת צמידים, צמידי אירועים ישראל, תגי הפקה מקצועיים, שירות צמידים לאירועים"
+        url="https://stash-events.co.il/about"
+        structuredData={structuredData}
+      />
       <Header />
       
       <main className="py-12 sm:py-16 md:py-20">

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MessageCircle, Clock, Truck, Zap, Package, AlertCircle, CheckCircle } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const DeliveryTimes = () => {
   const deliveryTable = [
@@ -84,6 +85,12 @@ const DeliveryTimes = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="זמני אספקה - Stash Events | מידע מפורט על זמני ייצור ומשלוח"
+        description="מידע מפורט על זמני אספקה לכל סוגי המוצרים - צמידי בד, צמידי נייר, צמידי ויניל ותגי הפקה. טבלת זמנים, אפשרויות משלוח ומידע על משלוחים דחופים."
+        keywords="זמני אספקה צמידים, זמן ייצור צמידים, משלוח צמידים, אספקה מהירה צמידים, משלוח דחוף צמידים, זמן אספקה תגי הפקה"
+        url="https://stash-events.co.il/delivery-times"
+      />
       <Header />
       
       <main>

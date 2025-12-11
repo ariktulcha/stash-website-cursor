@@ -97,9 +97,11 @@ const ProductGallery = ({ productId }: ProductGalleryProps) => {
                 <div className="relative h-64 sm:h-80 rounded-lg overflow-hidden bg-gradient-card shadow-card">
                   <img
                     src={images[currentIndex].url}
-                    alt={images[currentIndex].title || `תמונה ${currentIndex + 1}`}
+                    alt={images[currentIndex].title || `${product.name} - תמונה ${currentIndex + 1} | Stash Events`}
+                    title={images[currentIndex].description || images[currentIndex].title}
                     className="w-full h-full object-cover"
                     onClick={() => openLightbox(currentIndex)}
+                    loading={currentIndex === 0 ? "eager" : "lazy"}
                   />
                   
                   {images.length > 1 && (
@@ -150,9 +152,11 @@ const ProductGallery = ({ productId }: ProductGalleryProps) => {
                 <div className="relative h-64 lg:h-80 rounded-lg overflow-hidden bg-gradient-card shadow-card">
                   <img
                     src={images[currentIndex].url}
-                    alt={images[currentIndex].title || `תמונה ${currentIndex + 1}`}
+                    alt={images[currentIndex].title || `${product.name} - תמונה ${currentIndex + 1} | Stash Events`}
+                    title={images[currentIndex].description || images[currentIndex].title}
                     className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
                     onClick={() => openLightbox(currentIndex)}
+                    loading="eager"
                   />
                   
                   {images.length > 1 && (
@@ -211,8 +215,10 @@ const ProductGallery = ({ productId }: ProductGalleryProps) => {
                         <div className="aspect-square overflow-hidden rounded-lg">
                           <img
                             src={image.url}
-                            alt={image.title || `תמונה ${index + 1}`}
+                            alt={image.title || `${product.name} - תמונה ${index + 1} | Stash Events`}
+                            title={image.description || image.title}
                             className="w-full h-full object-cover"
+                            loading="lazy"
                           />
                         </div>
                       </CardContent>
@@ -234,7 +240,8 @@ const ProductGallery = ({ productId }: ProductGalleryProps) => {
           <div className="relative max-w-6xl max-h-full">
             <img
               src={images[selectedImage].url}
-              alt={images[selectedImage].title || `תמונה ${selectedImage + 1}`}
+              alt={images[selectedImage].title || `${product.name} - תמונה ${selectedImage + 1} | Stash Events`}
+              title={images[selectedImage].description || images[selectedImage].title}
               className="max-w-full max-h-[90vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
             />

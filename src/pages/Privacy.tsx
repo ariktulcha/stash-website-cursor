@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Lock, Eye, FileText, Mail, AlertCircle } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const Privacy = () => {
   const sections = [
@@ -86,6 +87,12 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="מדיניות פרטיות - Stash Events | הגנה על הפרטיות שלכם"
+        description="מדיניות פרטיות מפורטת של Stash Events. מידע על איסוף, שימוש והגנה על המידע האישי שלכם. הגנה על הפרטיות היא בראש סדר העדיפויות שלנו."
+        keywords="מדיניות פרטיות, הגנת פרטיות, אבטחת מידע, עוגיות, זכויות משתמש, Stash Events פרטיות"
+        url="https://stash-events.co.il/privacy"
+      />
       <Header />
       
       <main className="py-20">

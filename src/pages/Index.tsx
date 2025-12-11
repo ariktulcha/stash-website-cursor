@@ -7,10 +7,43 @@ import GallerySection from "@/components/GallerySection";
 import CTASection from "@/components/CTASection";
 import { PriceCalculator } from "@/components/PriceCalculator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SEO from "@/components/SEO";
 
 const Index = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Stash Events",
+    description: "צמידי אירועים ותגי הפקה מקצועיים - עיצוב אישי, הדפסה איכותית, אספקה מהירה",
+    url: "https://stash-events.co.il",
+    logo: "https://stash-events.co.il/logo.png",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+972-55-975-3446",
+      contactType: "customer service",
+      areaServed: "IL",
+      availableLanguage: "Hebrew"
+    },
+    sameAs: [
+      "https://www.instagram.com/stash.events",
+      "https://www.facebook.com/stash.events"
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tel Aviv",
+      addressCountry: "IL"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Stash Events - צמידי אירועים ותגי הפקה מקצועיים | הזמנה מהירה"
+        description="צמידי אירועים מקצועיים - צמידי בד, צמידי נייר, צמידי ויניל ותגי הפקה. עיצוב אישי, הדפסה איכותית, אספקה מהירה ומחיר תחרותי. מושלם לפסטיבלים, חתונות, אירועים עסקיים ועוד."
+        keywords="צמידי אירועים, צמידי בד, צמידי נייר, צמידי ויניל, תגי הפקה, מיון קהל, צמידים לפסטיבל, צמידים לחתונה, צמידים למועדון, צמידים לאירועים, תגי VIP, צמידים מותאמים אישית, הדפסה על צמידים"
+        url="https://stash-events.co.il/"
+        structuredData={structuredData}
+      />
       <Header />
       <main>
         <HeroSection />
