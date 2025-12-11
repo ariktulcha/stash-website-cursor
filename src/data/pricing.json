@@ -1,0 +1,58 @@
+{
+  "colored-paper-wristbands": {
+    "minQuantity": 500,
+    "currency": "ILS",
+    "tiers": [
+      { "min": 500, "max": 999, "pricePerUnit": 0.45 },
+      { "min": 1000, "max": 2499, "pricePerUnit": 0.38 },
+      { "min": 2500, "max": 4999, "pricePerUnit": 0.32 },
+      { "min": 5000, "max": 9999, "pricePerUnit": 0.28 },
+      { "min": 10000, "max": null, "pricePerUnit": 0.25 }
+    ]
+  },
+  "fabric-wristbands": {
+    "minQuantity": 100,
+    "currency": "ILS",
+    "tiers": [
+      { "min": 100, "max": 499, "pricePerUnit": 2.50 },
+      { "min": 500, "max": 999, "pricePerUnit": 2.20 },
+      { "min": 1000, "max": 2499, "pricePerUnit": 1.95 },
+      { "min": 2500, "max": 4999, "pricePerUnit": 1.75 },
+      { "min": 5000, "max": null, "pricePerUnit": 1.60 }
+    ]
+  },
+  "paper-graphic-wristbands": {
+    "minQuantity": 250,
+    "currency": "ILS",
+    "tiers": [
+      { "min": 250, "max": 499, "pricePerUnit": 0.85 },
+      { "min": 500, "max": 999, "pricePerUnit": 0.72 },
+      { "min": 1000, "max": 2499, "pricePerUnit": 0.65 },
+      { "min": 2500, "max": 4999, "pricePerUnit": 0.58 },
+      { "min": 5000, "max": null, "pricePerUnit": 0.52 }
+    ]
+  },
+  "vinyl-wristbands": {
+    "minQuantity": 100,
+    "currency": "ILS",
+    "tiers": [
+      { "min": 100, "max": 499, "pricePerUnit": 2.80 },
+      { "min": 500, "max": 999, "pricePerUnit": 2.50 },
+      { "min": 1000, "max": 2499, "pricePerUnit": 2.25 },
+      { "min": 2500, "max": 4999, "pricePerUnit": 2.00 },
+      { "min": 5000, "max": null, "pricePerUnit": 1.85 }
+    ]
+  },
+  "production-tags": {
+    "minQuantity": 50,
+    "currency": "ILS",
+    "tiers": [
+      { "min": 50, "max": 99, "pricePerUnit": 3.50 },
+      { "min": 100, "max": 249, "pricePerUnit": 3.00 },
+      { "min": 250, "max": 499, "pricePerUnit": 2.75 },
+      { "min": 500, "max": 999, "pricePerUnit": 2.50 },
+      { "min": 1000, "max": null, "pricePerUnit": 2.25 }
+    ]
+  }
+}
+
